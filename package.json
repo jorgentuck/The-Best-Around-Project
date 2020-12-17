@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/jamesjtuckbc/The-Best-Around-Project#readme",
   "dependencies": {
+    "eslint": "^7.15.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "handlebars": "^4.7.6",
