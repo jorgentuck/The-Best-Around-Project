@@ -1,0 +1,26 @@
+{
+  "name": "Tuck-Tech-Blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesjtuckbc/Tuck-Tech-Blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jamesjtuckbc/Tuck-Tech-Blog/issues"
+  },
+  "homepage": "https://github.com/jamesjtuckbc/Tuck-Tech-Blog#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "handlebars": "^4.7.6",
+    "sequelize": "^6.3.5"
+  }
+}
