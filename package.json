@@ -1,5 +1,5 @@
 {
-  "name": "Tuck-Tech-Blog",
+  "name": "The-Best-Around-Project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jamesjtuckbc/Tuck-Tech-Blog.git"
+    "url": "git+https://github.com/jamesjtuckbc/The-Best-Around-Project.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jamesjtuckbc/Tuck-Tech-Blog/issues"
+    "url": "https://github.com/jamesjtuckbc/The-Best-Around-Project/issues"
   },
-  "homepage": "https://github.com/jamesjtuckbc/Tuck-Tech-Blog#readme",
+  "homepage": "https://github.com/jamesjtuckbc/The-Best-Around-Project#readme",
   "dependencies": {
     "express": "^4.17.1",
     "express-session": "^1.17.1",
