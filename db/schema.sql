@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS macrame_db;
+
+CREATE DATABASE macrame_db;
