@@ -32,4 +32,26 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const designData = await Designs.findByPk(req.params.id, {
+      include: [
+        { model: Favorites },
+        { model: Images },
+        { model: Instructions },
+        { model: Users, attributes: { exclude: ['password'] } },
+        { model: Videos },
+        { model: Votes },
+      ],
+    });
+    if (!designData) {
+      res.status(404).json({ message: 'No Designs found' });
+      return;
+    }
+    res.status(200).json(designData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
