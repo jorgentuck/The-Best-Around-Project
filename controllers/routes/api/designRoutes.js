@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
       ],
     });
     if (designData.length == 0) {
-      res.status(404).json({ message: 'No Designs found' });
+      res.status(404).json({ message: 'No designs found' });
       return;
     }
     res.status(200).json(designData);
@@ -45,7 +45,7 @@ router.get('/:id', async (req, res) => {
       ],
     });
     if (!designData) {
-      res.status(404).json({ message: 'No Designs found' });
+      res.status(404).json({ message: 'No designs found' });
       return;
     }
     res.status(200).json(designData);
