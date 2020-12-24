@@ -7,7 +7,7 @@ module.exports = {
               'sage': '#667761',
               'dark-sage' : '#545e56',
               'brown-mauve' : '#917c78',
-              'mauve' : '#b794920',
+              'mauve' : '#b79492',
               'light-pink' : '#eae1df',
           }
       },
