@@ -1,5 +1,15 @@
 const router = require('express').Router();
+const bcrypt = require('bcrypt');
 const checkAuth = require('../../utils/auth');
+const {
+  Designs,
+  Favorites,
+  Images,
+  Instructions,
+  Users,
+  Videos,
+  Votes,
+} = require('../../models');
 
 router.get('/', async (req, res) => {
   try {
@@ -35,6 +45,48 @@ router.get('/upload', checkAuth, async (req, res) => {
     res.render('upload');
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+router.post('/login', async (req, res) => {
+  try {
+    const user = await Users.findOne({
+      where: { user_name: req.body.user_name },
+    });
+
+    if (!user) {
+      res.status(404).json({ message: 'Login failed!' });
+      return;
+    }
+
+    const passValidation = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+
+    if (!passValidation) {
+      res.status(404).json({ message: 'Login failed!' });
+      return;
+    }
+    req.session.save(() => {
+      req.session.user_id = user.id;
+      req.session.logged_in = true;
+    });
+    // res.status(200).json({ message: 'Login Success!' });
+    res.status(200).json(req.session);
+    // res.render('profile');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.post('/logout', (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
   }
 });
 
