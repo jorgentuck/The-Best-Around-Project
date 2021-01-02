@@ -32,8 +32,8 @@ router.get('/login', async (req, res) => {
   }
 });
 
-router.get('/profile', async (req, res) => {
-// router.get('/profile', checkAuth, async (req, res) => {
+// router.get('/profile', async (req, res) => {
+router.get('/profile', checkAuth, async (req, res) => {
   try {
     res.render('profile');
   } catch (err) {
@@ -41,8 +41,8 @@ router.get('/profile', async (req, res) => {
   }
 });
 
-router.get('/upload', async (req, res) => {
-// router.get('/upload', checkAuth, async (req, res) => {
+// router.get('/upload', async (req, res) => {
+router.get('/upload', checkAuth, async (req, res) => {
   try {
     res.render('upload');
   } catch (err) {
@@ -53,7 +53,7 @@ router.get('/upload', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const user = await Users.findOne({
-      where: { user_name: req.body.user_name },
+      where: { email_address: req.body.email_address },
     });
 
     if (!user) {
@@ -73,11 +73,12 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = user.id;
       req.session.logged_in = true;
-      console.log("logged in")
+
+      // res.status(200).json({ message: 'Login Success!' });
+      // res.status(200).json(req.session);
+      res.render('profile');
     });
-    // res.status(200).json({ message: 'Login Success!' });
-    res.status(200).json(req.session);
-    // res.render('profile');
+
   } catch (err) {
     res.status(500).json(err);
   }
