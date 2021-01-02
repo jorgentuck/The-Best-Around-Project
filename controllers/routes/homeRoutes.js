@@ -32,7 +32,8 @@ router.get('/login', async (req, res) => {
   }
 });
 
-router.get('/profile', checkAuth, async (req, res) => {
+router.get('/profile', async (req, res) => {
+// router.get('/profile', checkAuth, async (req, res) => {
   try {
     res.render('profile');
   } catch (err) {
@@ -40,7 +41,8 @@ router.get('/profile', checkAuth, async (req, res) => {
   }
 });
 
-router.get('/upload', checkAuth, async (req, res) => {
+router.get('/upload', async (req, res) => {
+// router.get('/upload', checkAuth, async (req, res) => {
   try {
     res.render('upload');
   } catch (err) {
@@ -55,7 +57,7 @@ router.post('/login', async (req, res) => {
     });
 
     if (!user) {
-      res.status(404).json({ message: 'Login failed!' });
+      res.status(404).json({ message: 'Login failed! email not found' });
       return;
     }
 
@@ -65,12 +67,13 @@ router.post('/login', async (req, res) => {
     );
 
     if (!passValidation) {
-      res.status(404).json({ message: 'Login failed!' });
+      res.status(404).json({ message: 'Login failed! password wrong' });
       return;
     }
     req.session.save(() => {
       req.session.user_id = user.id;
       req.session.logged_in = true;
+      console.log("logged in")
     });
     // res.status(200).json({ message: 'Login Success!' });
     res.status(200).json(req.session);
@@ -83,7 +86,7 @@ router.post('/login', async (req, res) => {
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
-      res.status(204).end();
+      res.render('homepage');
     });
   } else {
     res.status(404).end();
