@@ -32,7 +32,8 @@ router.get('/login', async (req, res) => {
   }
 });
 
-router.get('/profile', checkAuth, async (req, res) => {
+router.get('/profile', async (req, res) => {
+// router.get('/profile', checkAuth, async (req, res) => {
   try {
     res.render('profile');
   } catch (err) {
@@ -40,7 +41,8 @@ router.get('/profile', checkAuth, async (req, res) => {
   }
 });
 
-router.get('/upload', checkAuth, async (req, res) => {
+router.get('/upload', async (req, res) => {
+// router.get('/upload', checkAuth, async (req, res) => {
   try {
     res.render('upload');
   } catch (err) {
