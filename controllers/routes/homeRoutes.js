@@ -53,7 +53,7 @@ router.get('/upload', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const user = await Users.findOne({
-      where: { email_address: req.body.email_address },
+      where: { user_name: req.body.user_name },
     });
 
     if (!user) {
@@ -76,8 +76,8 @@ router.post('/login', async (req, res) => {
       console.log("logged in")
     });
     // res.status(200).json({ message: 'Login Success!' });
-    // res.status(200).json(req.session);
-    res.render('profile');
+    res.status(200).json(req.session);
+    // res.render('profile');
   } catch (err) {
     res.status(500).json(err);
   }
