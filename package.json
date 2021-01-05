@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/jamesjtuckbc/The-Best-Around-Project#readme",
   "dependencies": {
+    "alert": "^5.0.10",
     "autoprefixer": "^10.1.0",
     "aws-sdk": "^2.821.0",
     "bcrypt": "^5.0.0",

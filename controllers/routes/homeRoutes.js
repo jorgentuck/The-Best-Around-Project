@@ -10,6 +10,9 @@ const {
   Videos,
   Votes,
 } = require('../../models');
+const alert = require('alert');
+
+
 router.get('/', async (req, res) => {
   try {
     res.render('homepage');
@@ -17,6 +20,7 @@ router.get('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 router.get('/login', async (req, res) => {
   try {
     if (req.session.logged_in) {
@@ -56,29 +60,30 @@ router.get('/profile', checkAuth, async (req, res) => {
     }
 
     const favCount = await Favorites.findAndCountAll({
-      where: {user_id: req.session.user_id}
+      where: { user_id: req.session.user_id }
     });
 
     const vidCount = await Videos.findAndCountAll({
       include: [
         {
           model: Designs,
-          where: {user_id: req.session.user_id}
+          where: { user_id: req.session.user_id }
         }
       ],
-      
+
     });
 
     const designCount = await Designs.findAndCountAll({
-      where: {user_id: req.session.user_id}
+      where: { user_id: req.session.user_id }
     });
-    
+
     const user = userData.get({ plain: true });
     res.render('profile', { ...user, favCount, vidCount, designCount });
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 // router.get('/upload', async (req, res) => {
 router.get('/upload', checkAuth, async (req, res) => {
   try {
@@ -120,6 +125,9 @@ router.post('/save-details', (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
+  // if (req.session.logged_in) {
+  //   req.session.destroy();
+  // };
   try {
     const user = await Users.findOne({
       where: { email_address: req.body.email_address },
@@ -148,13 +156,48 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// router.post('/signup', async (req, res) => {
+//   try {
+//     console.log(req.body.email_address);
+//     console.log(req.body.user_name);
+//     const userEmail = await Users.findOne({ where: { email_address: req.body.email_address } });
+
+//     if (userEmail.length == 0) {
+//       console.log('Email Address already in use!');
+//       return;
+//     } else {
+//       const userUserName = await Users.findOne({ where: { user_name: req.body.user_name } });
+
+//       if (userUserName.length == 0) {
+//         console.log('User Name already in use!');
+//         return;
+//       };
+//     }
+//     const newUser = req.body;
+
+//     newUser.password = await bcrypt.hash(req.body.password, 10);
+
+//     newUser.full_name = newUser.first_name.concat(' ', newUser.last_name);
+
+//     const createdUser = await Users.create(newUser);
+
+//     req.session.save(() => {
+//       req.session.user_id = createdUser.id;
+//       req.session.logged_in = true;
+//       res.redirect('/profile');
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
 router.get('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
       res.redirect('/');
     });
   } else {
-    res.status(404).end();
+    res.redirect('/login');
   }
 });
 module.exports = router;
