@@ -3,11 +3,13 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const helpers = require('./utils/helpers');
-const routes = require('./controllers/routes')
+const routes = require('./controllers/routes');
+const aws = require('aws-sdk');
 
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+const S3_BUCKET = process.env.S3_BUCKET;
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -25,7 +27,7 @@ const sess = {
 
 app.use(session(sess));
 
-app.engine('handlebars', hbs.engine);
+app.engine('handlebars', hbs.engine, 'html', require('ejs').renderFile);
 app.set('view engine', 'handlebars');
 
 app.use(express.json());
@@ -33,6 +35,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
+
+aws.config.region = 'us-west-2';
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Now listening at: http://localhost:${PORT}`));
