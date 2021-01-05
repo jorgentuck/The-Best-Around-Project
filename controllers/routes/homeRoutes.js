@@ -31,7 +31,27 @@ router.get('/login', async (req, res) => {
 // router.get('/profile', async (req, res) => {
 router.get('/profile', checkAuth, async (req, res) => {
   try {
-    res.render('profile');
+    const userData = await Users.findByPk(req.params.id, {
+      include: [
+        {
+          model: Designs,
+          include: [
+            { model: Images },
+            { model: Instructions },
+            { model: Videos },
+          ],
+        },
+        { model: Favorites },
+        { model: Votes },
+      ],
+      attributes: { exclude: ['password'] },
+    });
+    if (userData.length == 0) {
+      res.status(404).json({ message: 'No user found with that ID' });
+      return;
+    }
+    const user = userData.get({ plain: true });
+    res.render('profile', {...user});
   } catch (err) {
     res.status(500).json(err);
   }
@@ -44,6 +64,7 @@ router.get('/upload', checkAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 router.get('/sign-s3', checkAuth, async (req, res) => {
   const userId = req.session.user_id;
   const s3 = new aws.S3();
@@ -56,6 +77,7 @@ router.get('/sign-s3', checkAuth, async (req, res) => {
     ContentType: fileType,
     ACL: 'public-read'
   };
+
   s3.getSignedUrl('putObject', s3Params, (err, data) => {
     if(err){
       console.log(err);
@@ -69,9 +91,11 @@ router.get('/sign-s3', checkAuth, async (req, res) => {
     res.end();
   });
 });
+
 router.post('/save-details', (req, res) => {
   // TODO: Read POSTed form data and do something useful
 });
+
 router.post('/login', async (req, res) => {
   try {
     const user = await Users.findOne({
@@ -100,6 +124,7 @@ router.post('/login', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 router.get('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {

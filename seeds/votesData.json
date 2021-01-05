@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1",
+    "user_id": "1",
+    "design_id": "1",
+    "score": "10"
+  },
+  {
+    "id": "2",
+    "user_id": "1",
+    "design_id": "2",
+    "score": "5"
+  }
+]
