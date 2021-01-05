@@ -28,6 +28,7 @@ router.get('/login', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 // router.get('/profile', async (req, res) => {
 router.get('/profile', checkAuth, async (req, res) => {
   try {
@@ -41,7 +42,10 @@ router.get('/profile', checkAuth, async (req, res) => {
             { model: Videos },
           ],
         },
-        { model: Favorites },
+        {
+          model: Favorites,
+          include: Designs,
+        },
         { model: Votes },
       ],
       attributes: { exclude: ['password'] },
@@ -50,8 +54,27 @@ router.get('/profile', checkAuth, async (req, res) => {
       res.status(404).json({ message: 'No user found with that ID' });
       return;
     }
+
+    const favCount = await Favorites.findAndCountAll({
+      where: {user_id: req.session.user_id}
+    });
+
+    const vidCount = await Videos.findAndCountAll({
+      include: [
+        {
+          model: Designs,
+          where: {user_id: req.session.user_id}
+        }
+      ],
+      
+    });
+
+    const designCount = await Designs.findAndCountAll({
+      where: {user_id: req.session.user_id}
+    });
+    
     const user = userData.get({ plain: true });
-    res.render('profile', {...user});
+    res.render('profile', { ...user, favCount, vidCount, designCount });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -79,7 +102,7 @@ router.get('/sign-s3', checkAuth, async (req, res) => {
   };
 
   s3.getSignedUrl('putObject', s3Params, (err, data) => {
-    if(err){
+    if (err) {
       console.log(err);
       return res.end();
     }
