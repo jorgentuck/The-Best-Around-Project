@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "user_id": 1,
+    "title": "Fringe",
+    "description": "How to add Fringe",
+    "rating": 5
+  },
+  {
+    "id": 2,
+    "user_id": 1,
+    "title": "Alternating Square Knots",
+    "description": "how to tie Alternating Square Knots",
+    "rating": 10
+  }
+]

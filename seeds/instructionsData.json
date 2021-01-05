@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "design_id": 1,
+    "sequence": 1,
+    "description": "fold in half"
+  },
+  {
+    "id": 2,
+    "design_id": 1,
+    "sequence": 2,
+    "description": "wrap around"
+  },
+  { 
+    "id": 3,
+    "design_id": 1,
+    "sequence": 3,
+    "description": "tie"
+  },
+  {
+    "id": 4,
+    "design_id": 2,
+    "sequence": 1,
+    "description": "fold in half"
+  },
+  {
+    "id": 5,
+    "design_id": 2,
+    "sequence": 2,
+    "description": "wrap around"
+  },
+  { 
+    "id": 6,
+    "design_id": 2,
+    "sequence": 3,
+    "description": "tie"
+  }
+]

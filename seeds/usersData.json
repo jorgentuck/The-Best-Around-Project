@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "first_name": "Steve",
+    "last_name": "Tester",
+    "full_name": "Steve Tester",
+    "email_address": "stester@domain.com",
+    "user_name": "stester",
+    "password": "$2b$10$R8VxMZGm3/R3lDk6Eysfc.2QTHdglyiQ0e.bUDJBRcYTFa5inqjS6",
+    "country_code": 1,
+    "time_diff": 5
+  }
+]
