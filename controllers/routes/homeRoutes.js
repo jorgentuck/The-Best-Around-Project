@@ -31,7 +31,7 @@ router.get('/login', async (req, res) => {
 // router.get('/profile', async (req, res) => {
 router.get('/profile', checkAuth, async (req, res) => {
   try {
-    const userData = await Users.findByPk(req.params.id, {
+    const userData = await Users.findByPk(req.session.user_id, {
       include: [
         {
           model: Designs,
@@ -77,7 +77,7 @@ router.get('/sign-s3', checkAuth, async (req, res) => {
     ContentType: fileType,
     ACL: 'public-read'
   };
-  
+
   s3.getSignedUrl('putObject', s3Params, (err, data) => {
     if(err){
       console.log(err);
