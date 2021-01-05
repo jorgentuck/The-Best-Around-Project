@@ -31,7 +31,7 @@ router.get('/login', async (req, res) => {
 // router.get('/profile', async (req, res) => {
 router.get('/profile', checkAuth, async (req, res) => {
   try {
-    const userData = await Users.findByPk(req.params.id, {
+    const userData = await Users.findByPk(req.session.user_id, {
       include: [
         {
           model: Designs,
