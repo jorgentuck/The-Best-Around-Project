@@ -1,134 +1,304 @@
-  <main>
-   
-      <!-- Replace with your content -->
-      <div class="px-4 py-6 sm:px-0">
-     
+<main>
 
-          
-            <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-              <div class="max-w-md w-full space-y-8">
-                <div>
+  <!-- Replace with your content -->
+  <div class="px-4 py-6 sm:px-0">
 
-                  <h2 class="mt-6 text-center text-3xl font-extrabold text-dark-sage">
-                    Sign in to your account
-                  </h2>
 
-                  </p>
-                </div>
-                <form class="mt-8 space-y-6" action="/login" method="POST">
-                  <input type="hidden" name="remember" value="true">
-                  <div class="rounded-md shadow-sm -space-y-px">
-                    <div>
-                      <label for="email_address" class="sr-only">Email address</label>
-                      <input id="email_address" name="email_address" type="email" autocomplete="email" required
-                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-mauve focus:z-10 sm:text-sm"
-                        placeholder="Email address">
-                    </div>
-                    <div>
-                      <label for="password" class="sr-only">Password</label>
-                      <input id="password" name="password" type="password" autocomplete="current-password" required
-                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-mauve focus:z-10 sm:text-sm"
-                        placeholder="Password">
-                    </div>
-                  </div>
 
-                  <div>
-                    <button type="submit"
-                      class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-gray-500 bg-brown-mauve hover:bg-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                      <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                        <!-- Heroicon name: lock-closed -->
-                        <svg class="h-5 w-5 text-brown-mauve group-hover:bg-brown-mauve"
-                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                          <path fill-rule="evenodd"
-                            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                            clip-rule="evenodd" />
-                        </svg>
-                      </span>
-                      Sign in
-                    </button>
-                  </div>
-                </form>
+    <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-md w-full space-y-8">
+        <div>
+
+          <h2 class="mt-6 text-center text-3xl font-extrabold text-dark-sage">
+            Sign in to your account
+          </h2>
+
+          </p>
+        </div>
+        {{!-- <form class="mt-8 space-y-6" action="/login" method="POST"> --}}
+          <form class="mt-8 space-y-6">
+            <input type="hidden" name="remember" value="true">
+            <div class="rounded-md shadow-sm -space-y-px">
+              <div>
+                <label for="login_email_address" class="sr-only">Email address</label>
+                <input id="login_email_address" name="email_address" type="email" autocomplete="email" required
+                  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-mauve focus:z-10 sm:text-sm"
+                  placeholder="Email address">
+              </div>
+              <div>
+                <label for="login_password" class="sr-only">Password</label>
+                <input id="login_password" name="password" type="password" autocomplete="current-password" required
+                  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-mauve focus:z-10 sm:text-sm"
+                  placeholder="Password">
               </div>
             </div>
 
-          <div class="hidden sm:block" aria-hidden="true">
-  <div class="py-5">
-    <div class="border-t border-gray-200"></div>
-  </div>
-</div>
-
-<div class="mt-10 sm:mt-0">
-  <div class="md:grid md:grid-cols-3 md:gap-6">
-    <div class="md:col-span-1">
-      <div class="px-4 sm:px-0">
-        <h3 class="text-lg font-medium leading-6 text-dark-sage">Create an Account</h3>
-        <p class="mt-1 text-sm text-mauve">
-          
-        </p>
+            <div>
+              <button type="submit"
+                class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-gray-500 bg-brown-mauve hover:bg-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                id="login-user">
+                <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                  <!-- Heroicon name: lock-closed -->
+                  <svg class="h-5 w-5 text-brown-mauve group-hover:bg-brown-mauve" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                      d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </span>
+                Sign in
+              </button>
+            </div>
+          </form>
       </div>
     </div>
-    <div class="mt-5 md:mt-0 md:col-span-2">
-      <form action="#" method="POST">
-        <div class="shadow overflow-hidden sm:rounded-md">
-          <div class="px-4 py-5 bg-white sm:p-6">
-            <div class="grid grid-cols-6 gap-6">
-              <div class="col-span-6 sm:col-span-3">
-                <label for="first_name" class="block text-sm font-medium text-dark-sage">First name</label>
-                <input type="text" name="first_name" id="first_name" autocomplete="given-name"
-                  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-              </div>
 
-              <div class="col-span-6 sm:col-span-3">
-                <label for="last_name" class="block text-sm font-medium text-dark-sage">Last name</label>
-                <input type="text" name="last_name" id="last_name" autocomplete="family-name"
-                  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-              </div>
+    <div class="hidden sm:block" aria-hidden="true">
+      <div class="py-5">
+        <div class="border-t border-gray-200"></div>
+      </div>
+    </div>
 
-              <div class="col-span-6 sm:col-span-4">
-                <label for="email_address" class="block text-sm font-medium text-dark-sage">Email address</label>
-                <input type="text" name="email_address" id="email_address" autocomplete="email"
-                  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-              </div>
-                <div class="col-span-6 sm:col-span-4">
-                <label for="password" class="block text-sm font-medium text-dark-sage">Password</label>
-                <input type="text" name="password" id="password" autocomplete="password"
-                  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-              </div>
+    <div class="mt-10 sm:mt-0">
+      <div class="md:grid md:grid-cols-3 md:gap-6">
+        <div class="md:col-span-1">
+          <div class="px-4 sm:px-0">
+            <h3 class="text-lg font-medium leading-6 text-dark-sage">Create an Account</h3>
+            <p class="mt-1 text-sm text-mauve">
 
-              <div class="col-span-6 sm:col-span-3">
-                <label for="country" class="block text-sm font-medium text-dark-sage">Country / Region</label>
-                <select id="country" name="country" autocomplete="country"
-                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                  <option>United States</option>
-                  <option>Canada</option>
-                  <option>Mexico</option>
-                </select>
-              </div>
-
-              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                <label for="state" class="block text-sm font-medium text-dark-sage">State / Province</label>
-                <input type="text" name="state" id="state"
-                  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-              </div>
-
-
-            </div>
-          </div>
-          <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-            <button type="submit"
-              class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-900 bg-brown-mauve hover:bg-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-mauve">
-              Save
-            </button>
+            </p>
           </div>
         </div>
-      </form>
+        <div class="mt-5 md:mt-0 md:col-span-2">
+          {{!-- <form action="/signup" method="POST"> --}}
+            <form>
+              <div class="shadow overflow-hidden sm:rounded-md">
+                <div class="px-4 py-5 bg-white sm:p-6">
+                  <div class="grid grid-cols-6 gap-6">
+                    <div class="col-span-6 sm:col-span-3">
+                      <label for="first_name" class="block text-sm font-medium text-dark-sage">First name</label>
+                      <input type="text" name="first_name" id="first_name" autocomplete="given-name"
+                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                      <label for="last_name" class="block text-sm font-medium text-dark-sage">Last name</label>
+                      <input type="text" name="last_name" id="last_name" autocomplete="family-name"
+                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-4">
+                      <label for="email_address" class="block text-sm font-medium text-dark-sage">Email address</label>
+                      <input type="text" name="email_address" id="email_address" autocomplete="email"
+                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    </div>
+                    <div class="col-span-6 sm:col-span-4">
+                      <label for="user_name" class="block text-sm font-medium text-dark-sage">User name</label>
+                      <input type="text" name="user_name" id="user_name" autocomplete="username"
+                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    </div>
+                    <div class="col-span-6 sm:col-span-4">
+                      <label for="password" class="block text-sm font-medium text-dark-sage">Password</label>
+                      <input type="password" name="password" id="password" autocomplete="password"
+                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                      <label for="country" class="block text-sm font-medium text-dark-sage">Country / Region</label>
+                      <select id="country" name="country" autocomplete="country"
+                        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option value='840'>United States</option>
+                        <option value='124'>Canada</option>
+                        <option value='484'>Mexico</option>
+                      </select>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                      <label for="time_zone" class="block text-sm font-medium text-dark-sage">Time Zone</label>
+                      <select id="time_zone"
+                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        <option timeZoneId="1" gmtAdjustment="GMT-12:00" useDaylightTime="0" value="-12">(GMT-12:00)
+                          International Date Line West</option>
+                        <option timeZoneId="2" gmtAdjustment="GMT-11:00" useDaylightTime="0" value="-11">(GMT-11:00)
+                          Midway Island, Samoa</option>
+                        <option timeZoneId="3" gmtAdjustment="GMT-10:00" useDaylightTime="0" value="-10">(GMT-10:00)
+                          Hawaii</option>
+                        <option timeZoneId="4" gmtAdjustment="GMT-09:00" useDaylightTime="1" value="-9">(GMT-09:00)
+                          Alaska</option>
+                        <option timeZoneId="5" gmtAdjustment="GMT-08:00" useDaylightTime="1" value="-8">(GMT-08:00)
+                          Pacific Time (US & Canada)</option>
+                        <option timeZoneId="6" gmtAdjustment="GMT-08:00" useDaylightTime="1" value="-8">(GMT-08:00)
+                          Tijuana, Baja California</option>
+                        <option timeZoneId="7" gmtAdjustment="GMT-07:00" useDaylightTime="0" value="-7">(GMT-07:00)
+                          Arizona</option>
+                        <option timeZoneId="8" gmtAdjustment="GMT-07:00" useDaylightTime="1" value="-7">(GMT-07:00)
+                          Chihuahua, La Paz, Mazatlan</option>
+                        <option timeZoneId="9" gmtAdjustment="GMT-07:00" useDaylightTime="1" value="-7">(GMT-07:00)
+                          Mountain Time (US & Canada)</option>
+                        <option timeZoneId="10" gmtAdjustment="GMT-06:00" useDaylightTime="0" value="-6">(GMT-06:00)
+                          Central America</option>
+                        <option timeZoneId="11" gmtAdjustment="GMT-06:00" useDaylightTime="1" value="-6">(GMT-06:00)
+                          Central Time (US & Canada)</option>
+                        <option timeZoneId="12" gmtAdjustment="GMT-06:00" useDaylightTime="1" value="-6">(GMT-06:00)
+                          Guadalajara, Mexico City, Monterrey</option>
+                        <option timeZoneId="13" gmtAdjustment="GMT-06:00" useDaylightTime="0" value="-6">(GMT-06:00)
+                          Saskatchewan</option>
+                        <option timeZoneId="14" gmtAdjustment="GMT-05:00" useDaylightTime="0" value="-5">(GMT-05:00)
+                          Bogota, Lima, Quito, Rio Branco</option>
+                        <option timeZoneId="15" gmtAdjustment="GMT-05:00" useDaylightTime="1" value="-5">(GMT-05:00)
+                          Eastern Time (US & Canada)</option>
+                        <option timeZoneId="16" gmtAdjustment="GMT-05:00" useDaylightTime="1" value="-5">(GMT-05:00)
+                          Indiana (East)</option>
+                        <option timeZoneId="17" gmtAdjustment="GMT-04:00" useDaylightTime="1" value="-4">(GMT-04:00)
+                          Atlantic Time (Canada)</option>
+                        <option timeZoneId="18" gmtAdjustment="GMT-04:00" useDaylightTime="0" value="-4">(GMT-04:00)
+                          Caracas, La Paz</option>
+                        <option timeZoneId="19" gmtAdjustment="GMT-04:00" useDaylightTime="0" value="-4">(GMT-04:00)
+                          Manaus</option>
+                        <option timeZoneId="20" gmtAdjustment="GMT-04:00" useDaylightTime="1" value="-4">(GMT-04:00)
+                          Santiago</option>
+                        <option timeZoneId="21" gmtAdjustment="GMT-03:30" useDaylightTime="1" value="-3.5">(GMT-03:30)
+                          Newfoundland</option>
+                        <option timeZoneId="22" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">(GMT-03:00)
+                          Brasilia</option>
+                        <option timeZoneId="23" gmtAdjustment="GMT-03:00" useDaylightTime="0" value="-3">(GMT-03:00)
+                          Buenos Aires, Georgetown</option>
+                        <option timeZoneId="24" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">(GMT-03:00)
+                          Greenland</option>
+                        <option timeZoneId="25" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">(GMT-03:00)
+                          Montevideo</option>
+                        <option timeZoneId="26" gmtAdjustment="GMT-02:00" useDaylightTime="1" value="-2">(GMT-02:00)
+                          Mid-Atlantic</option>
+                        <option timeZoneId="27" gmtAdjustment="GMT-01:00" useDaylightTime="0" value="-1">(GMT-01:00)
+                          Cape Verde Is.</option>
+                        <option timeZoneId="28" gmtAdjustment="GMT-01:00" useDaylightTime="1" value="-1">(GMT-01:00)
+                          Azores</option>
+                        <option timeZoneId="29" gmtAdjustment="GMT+00:00" useDaylightTime="0" value="0">(GMT+00:00)
+                          Casablanca, Monrovia, Reykjavik</option>
+                        <option timeZoneId="30" gmtAdjustment="GMT+00:00" useDaylightTime="1" value="0">(GMT+00:00)
+                          Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London</option>
+                        <option timeZoneId="31" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00)
+                          Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
+                        <option timeZoneId="32" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00)
+                          Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
+                        <option timeZoneId="33" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00)
+                          Brussels, Copenhagen, Madrid, Paris</option>
+                        <option timeZoneId="34" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00)
+                          Sarajevo, Skopje, Warsaw, Zagreb</option>
+                        <option timeZoneId="35" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) West
+                          Central Africa</option>
+                        <option timeZoneId="36" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00)
+                          Amman</option>
+                        <option timeZoneId="37" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00)
+                          Athens, Bucharest, Istanbul</option>
+                        <option timeZoneId="38" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00)
+                          Beirut</option>
+                        <option timeZoneId="39" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00)
+                          Cairo</option>
+                        <option timeZoneId="40" gmtAdjustment="GMT+02:00" useDaylightTime="0" value="2">(GMT+02:00)
+                          Harare, Pretoria</option>
+                        <option timeZoneId="41" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00)
+                          Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius</option>
+                        <option timeZoneId="42" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00)
+                          Jerusalem</option>
+                        <option timeZoneId="43" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00)
+                          Minsk</option>
+                        <option timeZoneId="44" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00)
+                          Windhoek</option>
+                        <option timeZoneId="45" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">(GMT+03:00)
+                          Kuwait, Riyadh, Baghdad</option>
+                        <option timeZoneId="46" gmtAdjustment="GMT+03:00" useDaylightTime="1" value="3">(GMT+03:00)
+                          Moscow, St. Petersburg, Volgograd</option>
+                        <option timeZoneId="47" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">(GMT+03:00)
+                          Nairobi</option>
+                        <option timeZoneId="48" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">(GMT+03:00)
+                          Tbilisi</option>
+                        <option timeZoneId="49" gmtAdjustment="GMT+03:30" useDaylightTime="1" value="3.5">(GMT+03:30)
+                          Tehran</option>
+                        <option timeZoneId="50" gmtAdjustment="GMT+04:00" useDaylightTime="0" value="4">(GMT+04:00) Abu
+                          Dhabi, Muscat</option>
+                        <option timeZoneId="51" gmtAdjustment="GMT+04:00" useDaylightTime="1" value="4">(GMT+04:00) Baku
+                        </option>
+                        <option timeZoneId="52" gmtAdjustment="GMT+04:00" useDaylightTime="1" value="4">(GMT+04:00)
+                          Yerevan</option>
+                        <option timeZoneId="53" gmtAdjustment="GMT+04:30" useDaylightTime="0" value="4.5">(GMT+04:30)
+                          Kabul</option>
+                        <option timeZoneId="54" gmtAdjustment="GMT+05:00" useDaylightTime="1" value="5">(GMT+05:00)
+                          Yekaterinburg</option>
+                        <option timeZoneId="55" gmtAdjustment="GMT+05:00" useDaylightTime="0" value="5">(GMT+05:00)
+                          Islamabad, Karachi, Tashkent</option>
+                        <option timeZoneId="56" gmtAdjustment="GMT+05:30" useDaylightTime="0" value="5.5">(GMT+05:30)
+                          Sri Jayawardenapura</option>
+                        <option timeZoneId="57" gmtAdjustment="GMT+05:30" useDaylightTime="0" value="5.5">(GMT+05:30)
+                          Chennai, Kolkata, Mumbai, New Delhi</option>
+                        <option timeZoneId="58" gmtAdjustment="GMT+05:45" useDaylightTime="0" value="5.75">(GMT+05:45)
+                          Kathmandu</option>
+                        <option timeZoneId="59" gmtAdjustment="GMT+06:00" useDaylightTime="1" value="6">(GMT+06:00)
+                          Almaty, Novosibirsk</option>
+                        <option timeZoneId="60" gmtAdjustment="GMT+06:00" useDaylightTime="0" value="6">(GMT+06:00)
+                          Astana, Dhaka</option>
+                        <option timeZoneId="61" gmtAdjustment="GMT+06:30" useDaylightTime="0" value="6.5">(GMT+06:30)
+                          Yangon (Rangoon)</option>
+                        <option timeZoneId="62" gmtAdjustment="GMT+07:00" useDaylightTime="0" value="7">(GMT+07:00)
+                          Bangkok, Hanoi, Jakarta</option>
+                        <option timeZoneId="63" gmtAdjustment="GMT+07:00" useDaylightTime="1" value="7">(GMT+07:00)
+                          Krasnoyarsk</option>
+                        <option timeZoneId="64" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00)
+                          Beijing, Chongqing, Hong Kong, Urumqi</option>
+                        <option timeZoneId="65" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00)
+                          Kuala Lumpur, Singapore</option>
+                        <option timeZoneId="66" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00)
+                          Irkutsk, Ulaan Bataar</option>
+                        <option timeZoneId="67" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00)
+                          Perth</option>
+                        <option timeZoneId="68" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00)
+                          Taipei</option>
+                        <option timeZoneId="69" gmtAdjustment="GMT+09:00" useDaylightTime="0" value="9">(GMT+09:00)
+                          Osaka, Sapporo, Tokyo</option>
+                        <option timeZoneId="70" gmtAdjustment="GMT+09:00" useDaylightTime="0" value="9">(GMT+09:00)
+                          Seoul</option>
+                        <option timeZoneId="71" gmtAdjustment="GMT+09:00" useDaylightTime="1" value="9">(GMT+09:00)
+                          Yakutsk</option>
+                        <option timeZoneId="72" gmtAdjustment="GMT+09:30" useDaylightTime="0" value="9.5">(GMT+09:30)
+                          Adelaide</option>
+                        <option timeZoneId="73" gmtAdjustment="GMT+09:30" useDaylightTime="0" value="9.5">(GMT+09:30)
+                          Darwin</option>
+                        <option timeZoneId="74" gmtAdjustment="GMT+10:00" useDaylightTime="0" value="10">(GMT+10:00)
+                          Brisbane</option>
+                        <option timeZoneId="75" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">(GMT+10:00)
+                          Canberra, Melbourne, Sydney</option>
+                        <option timeZoneId="76" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">(GMT+10:00)
+                          Hobart</option>
+                        <option timeZoneId="77" gmtAdjustment="GMT+10:00" useDaylightTime="0" value="10">(GMT+10:00)
+                          Guam, Port Moresby</option>
+                        <option timeZoneId="78" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">(GMT+10:00)
+                          Vladivostok</option>
+                        <option timeZoneId="79" gmtAdjustment="GMT+11:00" useDaylightTime="1" value="11">(GMT+11:00)
+                          Magadan, Solomon Is., New Caledonia</option>
+                        <option timeZoneId="80" gmtAdjustment="GMT+12:00" useDaylightTime="1" value="12">(GMT+12:00)
+                          Auckland, Wellington</option>
+                        <option timeZoneId="81" gmtAdjustment="GMT+12:00" useDaylightTime="0" value="12">(GMT+12:00)
+                          Fiji, Kamchatka, Marshall Is.</option>
+                        <option timeZoneId="82" gmtAdjustment="GMT+13:00" useDaylightTime="0" value="13">(GMT+13:00)
+                          Nuku'alofa</option>
+                      </select>
+                    </div>
+
+
+                  </div>
+                </div>
+                <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                  <button type="submit"
+                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-900 bg-brown-mauve hover:bg-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-mauve"
+                    id="create-user">
+                    Save
+                  </button>
+                </div>
+              </div>
+            </form>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
-
-
-
-      </div></div>
-      </main>
-     
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/login.js"></script>
