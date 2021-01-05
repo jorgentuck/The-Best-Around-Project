@@ -10,7 +10,6 @@ const {
   Videos,
   Votes,
 } = require('../../models');
-
 router.get('/', async (req, res) => {
   try {
     res.render('homepage');
@@ -18,20 +17,17 @@ router.get('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 router.get('/login', async (req, res) => {
   try {
     if (req.session.logged_in) {
       res.redirect('/profile');
       return;
     }
-
     res.render('login');
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
 // router.get('/profile', async (req, res) => {
 router.get('/profile', checkAuth, async (req, res) => {
   try {
@@ -60,7 +56,6 @@ router.get('/profile', checkAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 // router.get('/upload', async (req, res) => {
 router.get('/upload', checkAuth, async (req, res) => {
   try {
@@ -106,17 +101,14 @@ router.post('/login', async (req, res) => {
     const user = await Users.findOne({
       where: { email_address: req.body.email_address },
     });
-
     if (!user) {
       res.status(404).json({ message: 'Login failed!' });
       return;
     }
-
     const passValidation = await bcrypt.compare(
       req.body.password,
       user.password
     );
-
     if (!passValidation) {
       res.status(404).json({ message: 'Login failed!' });
       return;
@@ -124,12 +116,10 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = user.id;
       req.session.logged_in = true;
-
       // res.status(200).json({ message: 'Login Success!' });
       // res.status(200).json(req.session);
       res.redirect('/profile');
     });
-
   } catch (err) {
     res.status(500).json(err);
   }
@@ -144,5 +134,4 @@ router.get('/logout', (req, res) => {
     res.status(404).end();
   }
 });
-
 module.exports = router;
