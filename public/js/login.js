@@ -10,6 +10,7 @@ $(document).ready(function () {
   const signUpemail_address = $('#email_address');
   const signUpuser_name = $('#user_name');
   const signUppassword = $('#password');
+  const signUppasswordConf = $('#password_conf');
   const signUpcountry = $('#country');
   const signUptime_zone = $('#time_zone');
 
@@ -61,6 +62,7 @@ $(document).ready(function () {
   // validate password meets requirements
   function valPassword(newUser) {
 
+    if (newUser.password === newUser.password_conf){
 
     const passArray = Array.from(newUser.password);
     // console.log(passArray);
@@ -73,6 +75,10 @@ $(document).ready(function () {
     // console.log('password is good');
 
     createUser(newUser)
+  } else {
+    alert('Passwords do not match!');
+    return;
+  }
   };
 
 
@@ -132,6 +138,7 @@ $(document).ready(function () {
       email_address: signUpemail_address.val().trim(),
       user_name: signUpuser_name.val().trim(),
       password: signUppassword.val().trim(),
+      password_conf: signUppasswordConf.val().trim(),
       country_code: signUpcountry.val().trim(),
       time_diff: signUptime_zone.val().trim(),
     }
