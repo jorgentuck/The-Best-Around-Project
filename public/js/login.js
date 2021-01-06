@@ -17,14 +17,16 @@ $(document).ready(function () {
 
   // check to see if username in use
   async function checkUserName(newUser) {
-    console.log(newUser.user_name)
+    // console.log(newUser.user_name)
     try {
       const result = await $.ajax({
-        url: '/api/user/name',
-        data: newUser,
-        method: 'GET'
+        url: `/api/user/name/${newUser.user_name}`,
+        // data: {user_name: 'jamesjtuck@gmail.com'},
+        method: 'GET',
+        // processData: false
       });
-      console.log(result);
+      // const result = await $.get('/api/user/name', newUser);
+      // console.log(result);
 
       if (result.message === 'That Username is in use') {
         alert('That Username is already in use, please select another');
@@ -38,18 +40,15 @@ $(document).ready(function () {
 
   // check to see if email address in use
   async function checkEmailAddress(newUser) {
-
-
-
+// console.log(newUser.email_address);
     try {
       const result = await $.ajax({
-        url: '/api/user/email',
-        data: newUser,
-        method: 'GET'
+        url: `/api/user/email/${newUser.email_address}`,
+        method: 'GET',
       });
-      console.log(result);
+      // console.log(result);
 
-      if (result.message === 'That Email Address is in use') {
+      if (result.message === 'That Email is in use') {
         alert('That Email Address is already in use, please select another');
         return;
       }
@@ -64,14 +63,14 @@ $(document).ready(function () {
 
 
     const passArray = Array.from(newUser.password);
-    console.log(passArray);
+    // console.log(passArray);
     if (passArray.length < 8) {
       alert('please enter a password with at least 8 characters');
       return;
     }
 
     // go to next step
-    console.log('password is good');
+    // console.log('password is good');
 
     createUser(newUser)
   };
@@ -79,7 +78,7 @@ $(document).ready(function () {
 
   // post new user
   async function createUser(newUser) {
-    console.log(newUser);
+    // console.log(newUser);
     try {
       const result = await $.ajax({
         url: '/api/user/',
@@ -97,7 +96,7 @@ $(document).ready(function () {
   }
 
   async function loginUser(userData) {
-    console.log(userData);
+    // console.log(userData);
     try {
       const result = await $.ajax({
         url: '/login',
@@ -119,13 +118,13 @@ $(document).ready(function () {
 
   signUpBtnEl.on('click', (e) => {
     e.preventDefault();
-    console.log(signUpfirst_name.val().trim());
-    console.log(signUplast_name.val().trim());
-    console.log(signUpemail_address.val().trim());
-    console.log(signUpuser_name.val().trim());
-    console.log(signUppassword.val().trim());
-    console.log(signUpcountry.val().trim());
-    console.log(signUptime_zone.val().trim());
+    // console.log(signUpfirst_name.val().trim());
+    // console.log(signUplast_name.val().trim());
+    // console.log(signUpemail_address.val().trim());
+    // console.log(signUpuser_name.val().trim());
+    // console.log(signUppassword.val().trim());
+    // console.log(signUpcountry.val().trim());
+    // console.log(signUptime_zone.val().trim());
 
     const newUser = {
       first_name: signUpfirst_name.val().trim(),
@@ -143,8 +142,8 @@ $(document).ready(function () {
 
   loginBtnEl.on('click', (e) => {
     e.preventDefault();
-    console.log(loginEmail.val().trim());
-    console.log(loginPassword.val().trim());
+    // console.log(loginEmail.val().trim());
+    // console.log(loginPassword.val().trim());
 
     const userData = {
       email_address: loginEmail.val().trim(),
