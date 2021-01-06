@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="mt-5 md:mt-0 md:col-span-2">
-      <form action="#" method="POST">
+      <form action="/api/design/" method="POST">
         <div class="shadow sm:rounded-md sm:overflow-hidden">
           <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
             <div>
@@ -17,18 +17,18 @@
                 Title
               </label>
               <div class="mt-1">
-                <textarea id="title" name="about" rows="3"
+                <textarea id="title" rows="3"
                   class="shadow-sm focus:ring-sage focus:border-sage mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
                   placeholder="Enter a title"></textarea>
               </div>
             </div>
 
             <div>
-              <label for="about" class="block text-sm font-medium text-dark-sage">
+              <label for="description" class="block text-sm font-medium text-dark-sage">
                 About
               </label>
               <div class="mt-1">
-                <textarea id="about" name="about" rows="3"
+                <textarea id="description" rows="3"
                   class="shadow-sm focus:ring-sage focus:border-sage mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
                   placeholder="Describe your project"></textarea>
               </div>
@@ -39,7 +39,7 @@
 
             <div class="grid grid-cols-3 gap-6">
               <div class="col-span-3 sm:col-span-2">
-                <label for="link" class="block text-sm font-medium text-dark-sage">
+                <label for="video_link" class="block text-sm font-medium text-dark-sage">
                   Link
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
@@ -47,7 +47,7 @@
                     class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
                     http://
                   </span>
-                  <input type="text" name="video-link" id="link"
+                  <input type="text" id="video_link"
                     class="focus:ring-sage focus:border-sage flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                     placeholder="www.example.com">
                 </div>
@@ -55,11 +55,9 @@
             </div>
 
             <div class="flow-root">
-              <form method="POST" action="/save-details">
-                <button class="float-right ring p-1" type="submit">
-                  Submit
-                </button>
-              </form>
+              <button class="float-right ring p-1" type="submit">
+                Submit
+              </button>
 
               {{!-- <form id="formData">
                 <div class="form-group">
@@ -91,11 +89,8 @@
 
             </div>
           </div>
-
-
         </div>
+      </form>
     </div>
-    </form>
   </div>
-</div>
 </div>
