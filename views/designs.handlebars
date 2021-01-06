@@ -1,0 +1,32 @@
+<main>
+  <div class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Top Designs </h2>
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Vote for your favorite designs!
+        </p>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          These are the top designs, Vote for your favorites!
+        </p>
+      </div>
+      <div class="mt-10">
+        <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+          {{#each designs as |design|}}
+          <div class="flex">
+            <a href="/vote/{{design.id}}">
+              <div class="ml-4">
+                <img src="/assets/Macrame2.jpg" alt="Macrame Design" class="max-h-80">
+                <dt class="text-lg leading-6 font-medium text-gray-900">{{design.title}}
+                </dt>
+                <dd class="mt-2 text-base text-gray-500">{{design.description}}
+                </dd>
+              </div>
+            </a>
+          </div>
+          {{/each}}
+        </dl>
+      </div>
+    </div>
+  </div>
+</main>

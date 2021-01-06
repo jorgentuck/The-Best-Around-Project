@@ -4,12 +4,12 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 const helpers = require('./utils/helpers');
 const routes = require('./controllers/routes');
-const aws = require('aws-sdk');
 
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const S3_BUCKET = process.env.S3_BUCKET;
+
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-aws.config.region = 'us-west-2';
+// aws.config.region = 'us-west-2';
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Now listening at: http://localhost:${PORT}`));

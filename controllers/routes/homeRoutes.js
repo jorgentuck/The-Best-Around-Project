@@ -13,17 +13,19 @@ const {
 
 router.get('/', async (req, res) => {
   try {
-    // const designData = await Designs.findAll({
-    //   // limit: 4,
-    //   // order: 'rating DESC'
-    // });
-    // if (!designData) {
-    // //   res.render('homepage');
+    const designData = await Designs.findAll({
+      limit: 4,
+      order: [['rating', 'DESC'],]
+    });
+    if (!designData) {
+      res.render('homepage');
+      console.log('no data')
     // res.status(200).json(designData);
-    // }
-    // // const design = designData.get({ plain: true });
-    // // res.render('homepage', { ...design });
-    res.render('homepage');
+    }
+    const designs = designData.map((design) => design.get({ plain: true }));
+    console.log(designs)
+    res.render('homepage', { designs });
+    // res.render('homepage');
     // res.status(200).json(designData);
   } catch (err) {
     res.status(500).json(err);
@@ -105,42 +107,49 @@ router.get('/upload', checkAuth, async (req, res) => {
 // router.get('/vote', async (req, res) => {
 router.get('/vote', checkAuth, async (req, res) => {
   try {
-    res.render('vote');
+    const designData = await Designs.findAll({
+      limit: 4,
+      order: [['rating', 'DESC'],]
+    });
+    if (!designData) {
+      res.render('designs');
+      console.log('no data')
+    // res.status(200).json(designData);
+    }
+    const designs = designData.map((design) => design.get({ plain: true }));
+    console.log(designs)
+    res.render('designs', { designs });
+    // res.render('homepage');
+    // res.status(200).json(designData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/vote/:id', checkAuth, async (req, res) => {
+  try {
+    const designData = await Designs.findByPk(req.params.id, {
+      include: [
+        { model: Images },
+        { model: Instructions, order: [['sequence', 'ASC'],]},
+        { model: Videos },
+        { model: Votes },
+        { model: Favorites, where: {user_id: req.session.user_id}, required: false}
+      ],
+    });
+    if (!designData) {
+      res.render('vote');
+      console.log('no data')
+    }
+    // const designs = designData.map((design) => design.get({ plain: true }));
+    const designs = designData.get({ plain: true });
+    console.log(designs)
+    res.render('vote', { designs });
   } catch (err) {
     res.status(500).json(err);
   } 
 });
 
-router.get('/sign-s3', checkAuth, async (req, res) => {
-  const userId = req.session.user_id;
-  const s3 = new aws.S3();
-  const fileName = req.query['file-name'];
-  const fileType = req.query['file-type'];
-  const s3Params = {
-    Bucket: S3_BUCKET,
-    Key: userId.concat(fileName),
-    Expires: 120,
-    ContentType: fileType,
-    ACL: 'public-read'
-  };
-
-  s3.getSignedUrl('putObject', s3Params, (err, data) => {
-    if (err) {
-      console.log(err);
-      return res.end();
-    }
-    const returnData = {
-      signedRequest: data,
-      url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
-    };
-    res.write(JSON.stringify(returnData));
-    res.end();
-  });
-});
-
-router.post('/save-details', (req, res) => {
-  // TODO: Read POSTed form data and do something useful
-});
 
 router.post('/login', async (req, res) => {
   try {
@@ -175,20 +184,45 @@ router.post('/login', async (req, res) => {
 
 router.post('/vote/:id', checkAuth, async (req, res) => {
   try {
-    // const voterId = req.session.user_id;
-    const voterId = 1;
+    const voterId = req.session.user_id;
+    // const voterId = 1;
     const designId = req.params.id;
+    console.log('voter id', voterId);
+    console.log('design id', designId);
     const voted = await Votes.count({ where: { user_id: voterId}});
     if (voted === 0) {
       Votes.create({ user_id: voterId, design_id: designId});
+      console.log('created');
     } else {
       Votes.destroy({ where: {user_id: voterId}});
+      console.log('destroyed');
     }
     res.status(200).json({ message: 'Vote successful'});
   } catch (err) {
     res.status(500).json(err);
   }
-})
+});
+
+router.post('/fav/:id', checkAuth, async (req, res) => {
+  try {
+    const voterId = req.session.user_id;
+    // const voterId = 1;
+    const designId = req.params.id;
+    console.log('voter id', voterId);
+    console.log('design id', designId);
+    const voted = await Favorites.count({ where: { user_id: voterId}});
+    if (voted === 0) {
+      Favorites.create({ user_id: voterId, design_id: designId});
+      console.log('created');
+    } else {
+      Favorites.destroy({ where: {user_id: voterId}});
+      console.log('destroyed');
+    }
+    res.status(200).json({ message: 'Favorite successful'});
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.get('/logout', (req, res) => {
   if (req.session.logged_in) {
