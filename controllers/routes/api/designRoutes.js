@@ -74,16 +74,14 @@ router.post('/', async (req, res) => {
   try {
     
     const newDesign = req.body;
+    newDesign.user_id = req.session.user_id;
     const designData = await Designs.create(newDesign);
-    designData.design_id = designData.id;
-    await Instructions.bulkCreate(newDesign, {
-      individualHooks: true,
-      returning: true,
-    });
-    await Videos.bulkCreate(newDesign, {
-      individualHooks: true,
-      returning: true,
-    });
+    newDesign.design_id = designData.id;
+    // await Instructions.bulkCreate(newDesign, {
+    //   individualHooks: true,
+    //   returning: true,
+    // });
+    await Videos.create(newDesign);
     res.status(200).json({ message: 'Design added!' })
   } catch (err) {
     res.status(500).json(err);
