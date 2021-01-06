@@ -114,13 +114,10 @@ router.get('/vote', checkAuth, async (req, res) => {
     if (!designData) {
       res.render('designs');
       console.log('no data')
-    // res.status(200).json(designData);
     }
     const designs = designData.map((design) => design.get({ plain: true }));
     console.log(designs)
     res.render('designs', { designs });
-    // res.render('homepage');
-    // res.status(200).json(designData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -141,7 +138,6 @@ router.get('/vote/:id', checkAuth, async (req, res) => {
       res.render('vote');
       console.log('no data')
     }
-    // const designs = designData.map((design) => design.get({ plain: true }));
     const designs = designData.get({ plain: true });
     console.log(designs)
     res.render('vote', { designs });
@@ -172,10 +168,6 @@ router.post('/login', async (req, res) => {
       req.session.user_id = user.id;
       req.session.logged_in = true;
       res.status(200).json({ message: 'Login Success!' });
-      // res.status(200).json(req.session);
-      // console.log("made it here")
-      // return;
-      // res.redirect('/profile');
     });
   } catch (err) {
     res.status(500).json(err);
@@ -185,7 +177,6 @@ router.post('/login', async (req, res) => {
 router.post('/vote/:id', checkAuth, async (req, res) => {
   try {
     const voterId = req.session.user_id;
-    // const voterId = 1;
     const designId = req.params.id;
     console.log('voter id', voterId);
     console.log('design id', designId);
@@ -206,7 +197,6 @@ router.post('/vote/:id', checkAuth, async (req, res) => {
 router.post('/fav/:id', checkAuth, async (req, res) => {
   try {
     const voterId = req.session.user_id;
-    // const voterId = 1;
     const designId = req.params.id;
     console.log('voter id', voterId);
     console.log('design id', designId);
@@ -233,4 +223,9 @@ router.get('/logout', (req, res) => {
     res.redirect('/login');
   }
 });
+
+router.get('*', (req, res) => {
+  res.redirect('/')
+});
+
 module.exports = router;

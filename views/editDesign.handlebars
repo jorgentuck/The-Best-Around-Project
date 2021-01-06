@@ -1,0 +1,101 @@
+<div>
+  <div class="md:grid md:grid-cols-3 md:gap-6">
+    <div class="md:col-span-1">
+      <div class="px-4 sm:px-0">
+        <h3 class="text-lg font-medium leading-6 text-dark-sage">Edit Your Design</h3>
+        <p class="mt-1 text-sm text-mauve">
+          This information will be displayed publicly so be careful what you share.
+        </p>
+      </div>
+    </div>
+    <div class="mt-5 md:mt-0 md:col-span-2">
+      <form action="#" method="POST">
+        <div class="shadow sm:rounded-md sm:overflow-hidden">
+          <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+            <div>
+              <label for="title" class="block text-sm font-medium text-dark-sage">
+                Title
+              </label>
+              <div class="mt-1">
+                <textarea id="title" name="about" rows="3"
+                  class="shadow-sm focus:ring-sage focus:border-sage mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
+                  placeholder="Enter a title">{{designs.title}}</textarea>
+              </div>
+            </div>
+
+            <div>
+              <label for="about" class="block text-sm font-medium text-dark-sage">
+                About
+              </label>
+              <div class="mt-1">
+                <textarea id="about" name="about" rows="3"
+                  class="shadow-sm focus:ring-sage focus:border-sage mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
+                  placeholder="Describe your project">{{designs.description}}</textarea>
+              </div>
+              <p class="mt-2 text-sm text-mauve">
+                Brief description for your design. URLs are hyperlinked.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-3 gap-6">
+              <div class="col-span-3 sm:col-span-2">
+                <label for="link" class="block text-sm font-medium text-dark-sage">
+                  Link
+                </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <span
+                    class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+                    http://
+                  </span>
+                  <input type="text" name="video-link" id="link"
+                    class="focus:ring-sage focus:border-sage flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                    placeholder="www.example.com">
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-root">
+              <form method="POST" action="/save-details">
+                <button class="float-right ring p-1" type="submit">
+                  Submit
+                </button>
+              </form>
+
+              {{!-- <form id="formData">
+                <div class="form-group">
+                  <img id="img" src="https://via.placeholder.com/400x250/CCC/000?text=Image+Preview"
+                    style="width: 100%;" />
+                </div>
+                <div class="form-group">
+                  <label class="form">
+                    Title
+                  </label>
+                  <input type="text" class="form" name="title" />
+                </div>
+                <div class="form-group">
+                  <label class="form">
+                    Description
+                  </label>
+                  <textarea class="form" name="description"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form">
+                    Image
+                  </label>
+                  <input type="file" class="form" name="image" id="fileInput" />
+                </div>
+                <button type="submit" class="form">
+                  Create Post
+                </button>
+              </form> --}}
+
+            </div>
+          </div>
+
+
+        </div>
+    </div>
+    </form>
+  </div>
+</div>
+</div>
