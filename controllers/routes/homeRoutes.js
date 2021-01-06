@@ -10,12 +10,19 @@ const {
   Videos,
   Votes,
 } = require('../../models');
-const alert = require('alert');
-
 
 router.get('/', async (req, res) => {
   try {
-    res.render('homepage');
+    const designData = await Designs.findAll({
+      limit: 4,
+      order: 'rating DESC'
+    });
+    if (!designData) {
+      res.status(404).json({ message: 'No designs found' });
+      return;
+    }
+    const design = designData.get({ plain: true });
+    res.render('homepage', { ...design });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -93,6 +100,15 @@ router.get('/upload', checkAuth, async (req, res) => {
   }
 });
 
+// router.get('/vote', async (req, res) => {
+router.get('/vote', checkAuth, async (req, res) => {
+  try {
+    res.render('vote');
+  } catch (err) {
+    res.status(500).json(err);
+  } 
+});
+
 router.get('/sign-s3', checkAuth, async (req, res) => {
   const userId = req.session.user_id;
   const s3 = new aws.S3();
@@ -125,9 +141,6 @@ router.post('/save-details', (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  // if (req.session.logged_in) {
-  //   req.session.destroy();
-  // };
   try {
     const user = await Users.findOne({
       where: { email_address: req.body.email_address },
@@ -158,40 +171,22 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// router.post('/signup', async (req, res) => {
-//   try {
-//     console.log(req.body.email_address);
-//     console.log(req.body.user_name);
-//     const userEmail = await Users.findOne({ where: { email_address: req.body.email_address } });
-
-//     if (userEmail.length == 0) {
-//       console.log('Email Address already in use!');
-//       return;
-//     } else {
-//       const userUserName = await Users.findOne({ where: { user_name: req.body.user_name } });
-
-//       if (userUserName.length == 0) {
-//         console.log('User Name already in use!');
-//         return;
-//       };
-//     }
-//     const newUser = req.body;
-
-//     newUser.password = await bcrypt.hash(req.body.password, 10);
-
-//     newUser.full_name = newUser.first_name.concat(' ', newUser.last_name);
-
-//     const createdUser = await Users.create(newUser);
-
-//     req.session.save(() => {
-//       req.session.user_id = createdUser.id;
-//       req.session.logged_in = true;
-//       res.redirect('/profile');
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+router.post('/vote/:id', checkAuth, async (req, res) => {
+  try {
+    // const voterId = req.session.user_id;
+    const voterId = 1;
+    const designId = req.params.id;
+    const voted = await Votes.count({ where: { user_id: voterId}});
+    if (voted === 0) {
+      Votes.create({ user_id: voterId, design_id: designId});
+    } else {
+      Votes.destroy({ where: {user_id: voterId}});
+    }
+    res.status(200).json({ message: 'Vote successful'});
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
 
 router.get('/logout', (req, res) => {
   if (req.session.logged_in) {

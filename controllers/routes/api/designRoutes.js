@@ -54,4 +54,20 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+router.get('/top4', async (req, res) => {
+  try {
+    const designData = await Designs.findAll({
+      limit: 4,
+      order: 'rating DESC'
+    });
+    if (!designData) {
+      res.status(404).json({ message: 'No designs found' });
+      return;
+    }
+    res.status(200).json(designData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
