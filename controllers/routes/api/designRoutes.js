@@ -72,6 +72,7 @@ router.get('/top4', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
+    
     const newDesign = req.body;
     const designData = await Designs.create(newDesign);
     designData.design_id = designData.id;
