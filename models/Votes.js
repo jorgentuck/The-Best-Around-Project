@@ -27,10 +27,6 @@ Votes.init(
         key: 'id',
       },
     },
-    score: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
   },
   {
     sequelize,
