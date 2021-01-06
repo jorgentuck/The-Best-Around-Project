@@ -147,9 +147,11 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = user.id;
       req.session.logged_in = true;
-      // res.status(200).json({ message: 'Login Success!' });
+      res.status(200).json({ message: 'Login Success!' });
       // res.status(200).json(req.session);
-      res.redirect('/profile');
+      // console.log("made it here")
+      // return;
+      // res.redirect('/profile');
     });
   } catch (err) {
     res.status(500).json(err);

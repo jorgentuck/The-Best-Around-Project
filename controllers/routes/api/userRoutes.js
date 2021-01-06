@@ -65,23 +65,25 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.get('/name/:user_name', async (req, res) => {
+router.get('/name', async (req, res) => {
   try {
-    console.log(req.params.user_name)
+    console.log(req.body.user_name)
     const userData = await Users.findAndCountAll({
-      where: { user_name: req.params.user_name }
+      where: { user_name: req.body.user_name }
     });
+    console.log(userData);
+
     if (!userData.count == 0) {
       res.status(200).json({ message: 'That Username is in use' });
       return;
     }
     res.status(200).json({ message: 'That Username is free' });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ message: 'USERNAME CHECK'}, err);
   }
 });
 
-router.post('/email/', async (req, res) => {
+router.get('/email', async (req, res) => {
   try {
     console.log(req.body.email_address)
     const userData = await Users.findAndCountAll({
@@ -93,7 +95,7 @@ router.post('/email/', async (req, res) => {
     }
     res.status(200).json({ message: 'That Email is free' });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ message: 'EMAIL CHECK'}, err);
   }
 });
 
@@ -115,7 +117,7 @@ router.post('/', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = createdUser.id;
       req.session.logged_in = true;
-      res.redirect('/profile');
+      res.status(200).json({ message: 'Login Success!'})
     });
   } catch (err) {
     res.status(500).json(err);

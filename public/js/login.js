@@ -1,33 +1,3 @@
-// const loginForm = async (event) => {
-//     event.preventDefault();
-
-
-//     const email = document.querySelector('#email_address').value.trim();
-//     const password = document.querySelector('#password').value.trim();
-
-//     if (email && password) {
-
-//       const response = await fetch('/api/users/login', {
-//         method: 'POST',
-//         body: JSON.stringify({ email, password }),
-//         headers: { 'Content-Type': 'application/json' },
-//       });
-
-//       if (response.ok) {
-
-//         document.location.replace('/profile');
-//       } else {
-//         alert(response.statusText);
-//       }
-//     }
-//   };
-
-
-
-//   document
-//     .querySelector('.login-form')
-//     .addEventListener('submit', loginFormHandler);
-
 $(document).ready(function () {
 
   // DOM Variables
@@ -47,16 +17,16 @@ $(document).ready(function () {
 
   // check to see if username in use
   async function checkUserName(newUser) {
-    console.log(`/api/user/name/${newUser.user_name}`)
-    let result;
+    console.log(newUser.user_name)
     try {
-      result = await $.ajax({
-        url: `/api/user/name/${newUser.user_name}`,
-        method: "GET"
+      const result = await $.ajax({
+        url: '/api/user/name',
+        data: newUser,
+        method: 'GET'
       });
       console.log(result);
 
-      if (result.message === "That Username is in use") {
+      if (result.message === 'That Username is in use') {
         alert('That Username is already in use, please select another');
         return;
       }
@@ -69,17 +39,17 @@ $(document).ready(function () {
   // check to see if email address in use
   async function checkEmailAddress(newUser) {
 
-    let result;
+
 
     try {
-      result = await $.ajax({
-        url: '/api/user/email/',
+      const result = await $.ajax({
+        url: '/api/user/email',
         data: newUser,
-        method: "POST"
+        method: 'GET'
       });
       console.log(result);
 
-      if (result.message === "That Email Address is in use") {
+      if (result.message === 'That Email Address is in use') {
         alert('That Email Address is already in use, please select another');
         return;
       }
@@ -111,12 +81,36 @@ $(document).ready(function () {
   async function createUser(newUser) {
     console.log(newUser);
     try {
-      await $.ajax({
+      const result = await $.ajax({
         url: '/api/user/',
         data: newUser,
-        method: "POST"
+        method: 'POST'
       });
-      
+      if (result.message === 'Login Success!') {
+        window.location = '/profile';
+      } else {
+        window.location = '/login';
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function loginUser(userData) {
+    console.log(userData);
+    try {
+      const result = await $.ajax({
+        url: '/login',
+        data: userData,
+        method: 'POST',
+      });
+
+      if (result.message === 'Login Success!') {
+        window.location = '/profile';
+      } else {
+        window.location = '/login';
+      }
+
     } catch (err) {
       console.log(err);
     }
@@ -145,6 +139,19 @@ $(document).ready(function () {
 
     checkUserName(newUser);
 
+  });
+
+  loginBtnEl.on('click', (e) => {
+    e.preventDefault();
+    console.log(loginEmail.val().trim());
+    console.log(loginPassword.val().trim());
+
+    const userData = {
+      email_address: loginEmail.val().trim(),
+      password: loginPassword.val().trim(),
+    }
+
+    loginUser(userData);
   })
 
 });
