@@ -13,18 +13,18 @@ const {
 
 router.get('/', async (req, res) => {
   try {
-    const designData = await Designs.findAll({
-      // limit: 4,
-      // order: 'rating DESC'
-    });
-    if (!designData) {
-    //   res.render('homepage');
-    res.status(200).json(designData);
-    }
-    // const design = designData.get({ plain: true });
-    // res.render('homepage', { ...design });
-    // res.render('homepage');
-    res.status(200).json(designData);
+    // const designData = await Designs.findAll({
+    //   // limit: 4,
+    //   // order: 'rating DESC'
+    // });
+    // if (!designData) {
+    // //   res.render('homepage');
+    // res.status(200).json(designData);
+    // }
+    // // const design = designData.get({ plain: true });
+    // // res.render('homepage', { ...design });
+    res.render('homepage');
+    // res.status(200).json(designData);
   } catch (err) {
     res.status(500).json(err);
   }
