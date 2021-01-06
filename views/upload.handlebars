@@ -15,7 +15,7 @@
             <div class="grid grid-cols-3 gap-6">
               <div class="col-span-3 sm:col-span-2">
                 <label for="company_website" class="block text-sm font-medium text-dark-sage">
-                  Website
+                  Link
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <span
@@ -31,33 +31,45 @@
 
             <div>
               <label for="about" class="block text-sm font-medium text-dark-sage">
+                Title
+              </label>
+              <div class="mt-1">
+                <textarea id="about" name="about" rows="3"
+                  class="shadow-sm focus:ring-sage focus:border-sage mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
+                  placeholder="Enter a title"></textarea>
+              </div>
+            </div>
+
+            <div>
+              <label for="about" class="block text-sm font-medium text-dark-sage">
                 About
               </label>
               <div class="mt-1">
                 <textarea id="about" name="about" rows="3"
                   class="shadow-sm focus:ring-sage focus:border-sage mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
-                  placeholder="you@example.com"></textarea>
+                  placeholder="Describe your project"></textarea>
               </div>
               <p class="mt-2 text-sm text-mauve">
-                Brief description for your profile. URLs are hyperlinked.
+                Brief description for your design. URLs are hyperlinked.
               </p>
             </div>
 
-            <div>
-              <label class="block text-sm font-medium text-dark-sage">
-                Photo
-              </label>
-              <div class="mt-2 flex items-center">
+            <div class="flow-root">
+              <form method="POST" action="/save-details">
+                <button class="float-right ring p-1" type="submit">
+                  Submit
+                </button>
+              </form>
                
-                <input type="file" id="file-input"><br><br>
+                {{!-- <input type="file" id="file-input"><br><br>
                 <p id="status">Please select a file</p>
                 <img id="preview" src="/images/default.png">
                 <form method="POST" action="/save-details">
                   <input type="hidden" id="avatar-url" name="avatar-url" value="/images/default.png">
                   <input type="text" name="username" placeholder="Username"><br>
                   <input type="text" name="full-name" placeholder="Full name"><br><br>
-                  <input type="submit" value="Update profile">
-                </form>
+                  <input type="submit" value="Submit">
+                </form> --}}
               
               </div>
             </div>
