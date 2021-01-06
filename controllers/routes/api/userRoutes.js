@@ -65,11 +65,12 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.get('/name', async (req, res) => {
+router.get('/name/:user_name', async (req, res) => {
+  console.log('REQ - ', req);
   try {
-    console.log(req.body.user_name)
+    console.log(req.params.user_name);
     const userData = await Users.findAndCountAll({
-      where: { user_name: req.body.user_name }
+      where: { user_name: req.params.user_name }
     });
     console.log(userData);
 
@@ -83,11 +84,11 @@ router.get('/name', async (req, res) => {
   }
 });
 
-router.get('/email', async (req, res) => {
+router.get('/email/:email_address', async (req, res) => {
   try {
-    console.log(req.body.email_address)
+    console.log(req.params.email_address)
     const userData = await Users.findAndCountAll({
-      where: { email_address: req.body.email_address }
+      where: { email_address: req.params.email_address }
     });
     if (!userData.count == 0) {
       res.status(200).json({ message: 'That Email is in use' });
