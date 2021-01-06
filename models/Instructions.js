@@ -23,7 +23,7 @@ Instructions.init(
         type: DataTypes.STRING,
         allowNull: false,
       },
-      description: {
+      instruction: {
         type: DataTypes.STRING,
       },
   },
