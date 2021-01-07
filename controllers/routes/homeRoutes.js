@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
     if (!designData) {
       res.render('homepage');
       console.log('no data')
-    // res.status(200).json(designData);
+      // res.status(200).json(designData);
     }
     const designs = designData.map((design) => design.get({ plain: true }));
     console.log(designs)
@@ -128,10 +128,10 @@ router.get('/vote/:id', checkAuth, async (req, res) => {
     const designData = await Designs.findByPk(req.params.id, {
       include: [
         { model: Images },
-        { model: Instructions, order: [['sequence', 'ASC'],]},
+        { model: Instructions, order: [['sequence', 'ASC'],] },
         { model: Videos },
         { model: Votes },
-        { model: Favorites, where: {user_id: req.session.user_id}, required: false}
+        { model: Favorites, where: { user_id: req.session.user_id }, required: false }
       ],
     });
     if (!designData) {
@@ -143,9 +143,35 @@ router.get('/vote/:id', checkAuth, async (req, res) => {
     res.render('vote', { designs });
   } catch (err) {
     res.status(500).json(err);
-  } 
+  }
 });
 
+router.get('/edit/:id', async (req, res) => {
+  try {
+
+    const designData = await Designs.findByPk(req.params.id, {
+      include: [
+        { model: Favorites },
+        { model: Images },
+        { model: Instructions },
+        { model: Users, attributes: { exclude: ['password'] } },
+        { model: Videos },
+        { model: Votes },
+      ],
+    });
+    if (!designData) {
+      res.status(404).json({ message: 'No designs found' });
+      return;
+    }
+    const designs = designData.get({ plain: true });
+    console.log(designs)
+    res.render('editDesign', { designs });
+    // res.status(200).json(designData);
+    // res.render('editDesign')
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.post('/login', async (req, res) => {
   try {
@@ -180,15 +206,15 @@ router.post('/vote/:id', checkAuth, async (req, res) => {
     const designId = req.params.id;
     console.log('voter id', voterId);
     console.log('design id', designId);
-    const voted = await Votes.count({ where: { user_id: voterId}});
+    const voted = await Votes.count({ where: { user_id: voterId } });
     if (voted === 0) {
-      Votes.create({ user_id: voterId, design_id: designId});
+      Votes.create({ user_id: voterId, design_id: designId });
       console.log('created');
     } else {
-      Votes.destroy({ where: {user_id: voterId}});
+      Votes.destroy({ where: { user_id: voterId } });
       console.log('destroyed');
     }
-    res.status(200).json({ message: 'Vote successful'});
+    res.status(200).json({ message: 'Vote successful' });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -200,15 +226,15 @@ router.post('/fav/:id', checkAuth, async (req, res) => {
     const designId = req.params.id;
     console.log('voter id', voterId);
     console.log('design id', designId);
-    const voted = await Favorites.count({ where: { user_id: voterId}});
+    const voted = await Favorites.count({ where: { user_id: voterId } });
     if (voted === 0) {
-      Favorites.create({ user_id: voterId, design_id: designId});
+      Favorites.create({ user_id: voterId, design_id: designId });
       console.log('created');
     } else {
-      Favorites.destroy({ where: {user_id: voterId}});
+      Favorites.destroy({ where: { user_id: voterId } });
       console.log('destroyed');
     }
-    res.status(200).json({ message: 'Favorite successful'});
+    res.status(200).json({ message: 'Favorite successful' });
   } catch (err) {
     res.status(500).json(err);
   }

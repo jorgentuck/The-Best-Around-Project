@@ -72,7 +72,7 @@ router.get('/top4', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    
+
     const newDesign = req.body;
     newDesign.user_id = req.session.user_id;
     const designData = await Designs.create(newDesign);
@@ -82,10 +82,56 @@ router.post('/', async (req, res) => {
     //   returning: true,
     // });
     await Videos.create(newDesign);
-    res.status(200).json({ message: 'Design added!' })
+    // res.status(200).json({ message: 'Design added!' });
+    res.redirect(307, `/edit/${newDesign.design_id}`);
   } catch (err) {
     res.status(500).json(err);
   }
-})
+});
+
+router.post('/id/:id', async (req, res) => {
+  try {
+
+    const newDesign = req.body;
+    newDesign.user_id = req.session.user_id;
+    newDesign.design_id = parseInt(req.params.id);
+    console.log(newDesign)
+    await Designs.update(newDesign, {
+      where: {
+        id: newDesign.design_id
+      }
+    });
+    if (newDesign.video_link === '') {
+      await Videos.destroy({
+        where: {
+          design_id: newDesign.design_id
+        }
+      })
+    } else {
+      const videoData = await Videos.findOne({
+        where: { design_id: newDesign.design_id }
+      });
+      console.log('.get')
+      if (videoData) {
+        const videos = videoData.map((video) => video.get({ plain: true }));
+        console.log(videos);
+
+        console.log('update');
+        await Videos.update(newDesign, {
+          where: {
+            id: videos.id
+          }
+        });
+      }
+      else {
+        console.log('create')
+        await Videos.create(newDesign);
+      }
+    }
+    res.status(204).send();
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
