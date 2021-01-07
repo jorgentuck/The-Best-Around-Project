@@ -41,7 +41,7 @@ Designs.hasMany(Instructions, {
   onDelete: 'CASCADE'
 });
 
-Designs.hasMany(Videos, {
+Designs.hasOne(Videos, {
   foreignKey: 'design_id',
   onDelete: 'CASCADE'
 });
