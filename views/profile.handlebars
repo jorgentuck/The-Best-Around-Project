@@ -55,6 +55,14 @@
         </dt>
         {{designCount.count}}
       </div>
+       <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+         Edit Designs
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        {{#each designs as |design|}} <button class="outline: 2px dotted black; outline-offset: 2px;"><a href="/edit/{{design.id}}">{{design.title}}</a></button>{{/each}}
+        </dd>
+      </div>
     </dl>
   </div>
 </div>
