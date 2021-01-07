@@ -35,7 +35,7 @@
                         <div class="grid grid-cols-3 gap-6">
                             <div class="col-span-3 sm:col-span-2">
                                 <label for="video_link" class="block text-sm font-medium text-dark-sage">
-                                    Link
+                                    Video Link
                                 </label>
                                 <div class="mt-1 flex rounded-md shadow-sm">
                                     <input type="text" name="video_link" id="video_link"
@@ -44,20 +44,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div id="instructions">
                         {{#each designs.Instructions as |inst|}}
-                        <div>
-                            <input type="number" name="sequence{{inst.id}}{{inst.sequence}}" value="{{inst.sequence}}">
+                        <div class="steps">
+                            <input type="number" class="sequence" name="sequence{{inst.id}}{{inst.sequence}}" value="{{inst.sequence}}">
                             <div class="mt-1">
                                 <textarea id="instruction{{inst.sequence}}" name="instruction{{inst.id}}{{inst.sequence}}" rows="1"
-                                    class="shadow-sm focus:ring-sage focus:border-sage mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    class="description shadow-sm focus:ring-sage focus:border-sage mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Add instruction">{{inst.instruction}}</textarea>
                             </div>
                         </div>
                         {{/each}}
                         </div>
+                        <button type="button" id="add-instructions" class="outline: 2px dotted black; outline-offset: 2px;">Add Instruction</button>
                         <div class="flow-root">
-                            <button class="float-right ring p-1" type="submit">
+                            <button id="submit" class="float-right ring p-1" type="submit">
                                 Submit
                             </button>
                         </div>
@@ -94,3 +95,5 @@
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/editDesign.js"></script>
