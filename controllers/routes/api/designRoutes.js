@@ -82,8 +82,11 @@ router.post('/', async (req, res) => {
     //   returning: true,
     // });
     await Videos.create(newDesign);
-    // res.status(200).json({ message: 'Design added!' });
-    res.redirect(307, `/edit/${newDesign.design_id}`);
+    res.status(200).json({ 
+      message: 'Design added!',
+      id: newDesign.design_id,
+   });
+    // res.redirect(307, `/edit/${newDesign.design_id}`);
   } catch (err) {
     res.status(500).json(err);
   }
