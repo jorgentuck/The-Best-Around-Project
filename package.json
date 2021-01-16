@@ -24,6 +24,7 @@
     "autoprefixer": "^10.1.0",
     "aws-sdk": "^2.822.0",
     "bcrypt": "^5.0.0",
+    "compression": "^1.7.4",
     "connect-session-sequelize": "^7.0.4",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
